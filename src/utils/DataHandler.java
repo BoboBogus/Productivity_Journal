@@ -1,9 +1,6 @@
 package utils;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -12,10 +9,22 @@ public class DataHandler {
     static int ReflectionComponents = 3;
 
     // Create New Goal in the txt file
-    public static void CreateNewGoal(String Goal, int Difficulty) throws IOException {
+    public static void CreateNewGoal(GoalContainer container) throws IOException {
         File file = new File("data/Goal_Data.txt");
         FileWriter fileWriter = new FileWriter(file, true);
-        fileWriter.write("\r\n");
+        fileWriter.write(container.Date + "\n");
+        fileWriter.write(container.Goal + "\n");
+        fileWriter.write(container.Difficulty + "\n");
+    }
+
+    public static void CreateNewReflection(ReflectionContainer container) throws IOException {
+        File file = new File("data/Goal_Data.txt");
+        FileWriter fileWriter = new FileWriter(file, true);
+        fileWriter.write(container.Date + "\n");
+        fileWriter.write(container.Goal + "\n");
+        fileWriter.write(container.Description + "\n");
+        fileWriter.write(container.stars + "\n");
+        fileWriter.write(container.points + "\n");
     }
 
     public static void readElements(int lineStart) {
