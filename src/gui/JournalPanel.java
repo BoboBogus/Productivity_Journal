@@ -6,7 +6,7 @@ import javax.swing.*;
 public class JournalPanel extends JPanel
 {
     JButton star1; JButton star2; JButton star3; JButton star4; JButton star5;
-    int rating; //accessed later
+    int rating = 0; //accessed later
 
     public JournalPanel()
     {
