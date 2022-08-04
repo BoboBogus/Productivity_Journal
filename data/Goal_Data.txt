@@ -1,0 +1,4 @@
+Element Number = 1
+
+Goal = "Title"
+DifficultyMode = 0

@@ -1,18 +1,21 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import gui.*;
 
-public class AppFrame extends JFrame implements ActionListener {
+public class AppFrame extends JFrame {
     public AppFrame() {
+        setSize(100, 100);
         JournalPanel Journal = new JournalPanel();
         GraphPanel Graph = new GraphPanel();
+        JTabbedPane Tabbed = new JTabbedPane();
+        Tabbed.addTab("Graph", Graph);
+        Tabbed.addTab("Journal", Journal);
+
+        add(Tabbed);
+        pack();
         setVisible(true);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-
+    public static void main(String[] args) {
+        new AppFrame();
     }
 }
