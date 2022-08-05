@@ -1,2 +1,6 @@
-
+8/4/2022
+Goal = Go to the gym
+Description = this is working perfectly fine and im able ot log items in to the reflections database
+stars = 0
+difficulty = 0
 

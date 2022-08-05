@@ -1,4 +1,0 @@
-//sample of a Goal Data.txt bundle
-8/3/2022
-Goal = Title
-Difficulty = 0

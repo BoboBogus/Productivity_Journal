@@ -21,8 +21,9 @@ public class Submission extends JPanel {
         reflection = new JTextArea();
         add(reflection);
         reflection.setBounds(125, 45, 1650, 820);
-        reflection.setFont(new Font("Comic Sans MS", Font.BOLD, 22));
-        reflection.setBackground(Color.decode("#9fcefc"));
+        reflection.setFont(new Font("Hiragino Kaku Gothic Pro", Font.PLAIN, 22));
+        reflection.setBackground(Color.decode("#2e353c"));
+        reflection.setForeground(Color.decode("#fbfbfb"));
 
         // Star rating buttons
         star1 = new JButton();

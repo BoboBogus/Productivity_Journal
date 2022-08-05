@@ -15,8 +15,8 @@ public class DataHandler {
             File file = new File("data/Goal_Data.txt");
             FileWriter fileWriter = new FileWriter(file, true);
             fileWriter.write(container.Date + "\n");
-            fileWriter.write("Goal =" + container.Goal + "\n");
-            fileWriter.write("Goal =" + container.Difficulty + "\n");
+            fileWriter.write("Goal = " + container.Goal + "\n");
+            fileWriter.write("Difficulty = " + container.Difficulty + "\n");
             fileWriter.write("\n");
             fileWriter.close();
         } catch (IOException e) {
@@ -32,10 +32,10 @@ public class DataHandler {
             System.out.println(file.getAbsolutePath());
             FileWriter fileWriter = new FileWriter(file, true);
             fileWriter.write(container.Date + "\n");
-            fileWriter.write("Goal =" + container.Goal + "\n");
-            fileWriter.write("Description =" + container.Description + "\n");
-            fileWriter.write("stars =" + container.stars + "\n");
-            fileWriter.write("difficulty =" + container.difficulty + "\n");
+            fileWriter.write("Goal = " + container.Goal + "\n");
+            fileWriter.write("Description = " + container.Description + "\n");
+            fileWriter.write("stars = " + container.stars + "\n");
+            fileWriter.write("difficulty = " + container.difficulty + "\n");
             fileWriter.write("\n");
             fileWriter.close();
         } catch (IOException e) {
@@ -75,7 +75,7 @@ public class DataHandler {
 
     // outputs a ReflectionContainer based on the starting position of the text
     // container in the txt file
-    public static ReflectionContainer readRelectionElements(int lineStart) {
+    public static ReflectionContainer readReflectionElements(int lineStart) {
         String Date = "";
         String Goal = "";
         String Description = "";
