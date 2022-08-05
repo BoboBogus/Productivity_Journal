@@ -12,6 +12,7 @@ public class AppFrame extends JFrame {
 
         add(Tabbed);
         pack();
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 

@@ -18,4 +18,8 @@ public class ReflectionContainer {
         // difficulty x stars conversion rate
         points = stars * difficulty;
     }
+
+    public void SaveReflectionContainer() {
+        DataHandler.CreateNewReflection(this);
+    }
 }

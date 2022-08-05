@@ -10,4 +10,8 @@ public class GoalContainer {
         this.Goal = Goal;
         this.Difficulty = Difficulty;
     }
+
+    public void CreateNewGoal() {
+        DataHandler.CreateNewGoal(this);
+    }
 }

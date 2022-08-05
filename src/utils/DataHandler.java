@@ -2,6 +2,7 @@ package utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -9,22 +10,38 @@ import java.util.Scanner;
 public class DataHandler {
 
     // Create New Goal in the txt file
-    public static void CreateNewGoal(GoalContainer container) throws IOException {
-        File file = new File("data/Goal_Data.txt");
-        FileWriter fileWriter = new FileWriter(file, true);
-        fileWriter.write(container.Date + "\n");
-        fileWriter.write("Goal =" + container.Goal + "\n");
-        fileWriter.write("Goal =" + container.Difficulty + "\n");
+    public static void CreateNewGoal(GoalContainer container) {
+        try {
+            File file = new File("data/Goal_Data.txt");
+            FileWriter fileWriter = new FileWriter(file, true);
+            fileWriter.write(container.Date + "\n");
+            fileWriter.write("Goal =" + container.Goal + "\n");
+            fileWriter.write("Goal =" + container.Difficulty + "\n");
+            fileWriter.write("\n");
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public static void CreateNewReflection(ReflectionContainer container) throws IOException {
-        File file = new File("data/Goal_Data.txt");
-        FileWriter fileWriter = new FileWriter(file, true);
-        fileWriter.write(container.Date + "\n");
-        fileWriter.write("Goal =" + container.Goal + "\n");
-        fileWriter.write("Description =" + container.Description + "\n");
-        fileWriter.write("stars =" + container.stars + "\n");
-        fileWriter.write("difficulty =" + container.difficulty + "\n");
+    public static void CreateNewReflection(ReflectionContainer container) {
+
+        try {
+            File file = new File("data/Reflection_Data.txt");
+            System.out.println(file.getAbsolutePath());
+            FileWriter fileWriter = new FileWriter(file, true);
+            fileWriter.write(container.Date + "\n");
+            fileWriter.write("Goal =" + container.Goal + "\n");
+            fileWriter.write("Description =" + container.Description + "\n");
+            fileWriter.write("stars =" + container.stars + "\n");
+            fileWriter.write("difficulty =" + container.difficulty + "\n");
+            fileWriter.write("\n");
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     // outputs a GoalContainer based on the starting position of the text container

@@ -1,5 +1,2 @@
-8/3/2022
-Goal = Title
-Description = This is a Description
-Stars = 5
-Difficulty = 0
+
+
