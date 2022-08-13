@@ -1,6 +1,7 @@
 package utils;
 
 public class ReflectionContainer {
+    static int count;
     String Date;
     String Goal;
     String Description;
@@ -17,9 +18,10 @@ public class ReflectionContainer {
 
         // difficulty x stars conversion rate
         points = stars * difficulty;
+        count++;
     }
 
-    public void SaveReflectionContainer() {
+    public void SaveReflectionContainer() throws Exception {
         DataHandler.CreateNewReflection(this);
     }
 }

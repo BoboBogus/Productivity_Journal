@@ -1,47 +1,40 @@
 package utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DataHandler {
 
     // Create New Goal in the txt file
-    public static void CreateNewGoal(GoalContainer container) {
-        try {
-            File file = new File("data/Goal_Data.txt");
-            FileWriter fileWriter = new FileWriter(file, true);
-            fileWriter.write(container.Date + "\n");
-            fileWriter.write("Goal = " + container.Goal + "\n");
-            fileWriter.write("Difficulty = " + container.Difficulty + "\n");
-            fileWriter.write("\n");
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public static void CreateNewGoal(GoalContainer container) throws Exception {
+        int id = container.count;
+        String date = container.Date;
+        String goal = container.Goal;
+        int difficulty = container.Difficulty;
+        Connection conn = getConnection();
+        Statement stmt = conn.createStatement();
+        String append = "insert into goals values('" + id + "','" + date + "','" + goal + "','" + difficulty + "')";
+        stmt.executeUpdate(append);
+        conn.close();
     }
 
-    public static void CreateNewReflection(ReflectionContainer container) {
-
-        try {
-            File file = new File("data/Reflection_Data.txt");
-            System.out.println(file.getAbsolutePath());
-            FileWriter fileWriter = new FileWriter(file, true);
-            fileWriter.write(container.Date + "\n");
-            fileWriter.write("Goal = " + container.Goal + "\n");
-            fileWriter.write("Description = " + container.Description + "\n");
-            fileWriter.write("stars = " + container.stars + "\n");
-            fileWriter.write("difficulty = " + container.difficulty + "\n");
-            fileWriter.write("\n");
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public static void CreateNewReflection(ReflectionContainer container) throws Exception {
+        int id = container.count;
+        String date = container.Date;
+        String goal = container.Goal;
+        String description = container.Description;
+        int stars = container.stars;
+        int difficulty = container.difficulty;
+        Connection conn = getConnection();
+        Statement stmt = conn.createStatement();
+        String append = "insert into reflections values('" + id + "','" + date + "','" + goal + "','" + description
+                + "','" + stars + "','" + difficulty
+                + "')";
+        stmt.executeUpdate(append);
+        conn.close();
     }
 
     // outputs a GoalContainer based on the starting position of the text container
@@ -50,25 +43,6 @@ public class DataHandler {
         String Date = "";
         String Goal = "";
         int Difficulty = -1;
-        try {
-            File data = new File("DATA/Goal_Data.txt");
-            Scanner dataRead = new Scanner(data);
-            for (int lineNum = 1; dataRead.hasNext(); lineNum++) {
-                if (lineNum == lineStart) {
-                    Date = getValue(dataRead.nextLine());
-                }
-                if (lineNum == lineStart + 1) {
-                    Goal = getValue(dataRead.nextLine());
-                }
-                if (lineNum == lineStart + 2) {
-                    Difficulty = Integer.parseInt(getValue(dataRead.nextLine()));
-                }
-            }
-            dataRead.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
         GoalContainer container = new GoalContainer(Date, Goal, Difficulty);
         return container;
     }
@@ -81,40 +55,24 @@ public class DataHandler {
         String Description = "";
         int Stars = -1;
         int Difficulty = -1;
-        try {
-            File data = new File("DATA/Goal_Reflection_Data.txt");
-            Scanner dataRead = new Scanner(data);
-            for (int lineNum = 1; dataRead.hasNext(); lineNum++) {
-                if (lineNum == lineStart) {
-                    Date = getValue(dataRead.nextLine());
-                }
-                if (lineNum == lineStart + 1) {
-                    Goal = getValue(dataRead.nextLine());
-                }
-                if (lineNum == lineStart + 2) {
-                    Description = getValue(dataRead.nextLine());
-                }
-                if (lineNum == lineStart + 3) {
-                    Stars = Integer.parseInt(getValue(dataRead.nextLine()));
-                }
-                if (lineNum == lineStart + 4) {
-                    Difficulty = Integer.parseInt(getValue(dataRead.nextLine()));
-                }
-            }
-            dataRead.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
         ReflectionContainer container = new ReflectionContainer(Date, Goal, Description, Stars, Difficulty);
         return container;
     }
 
-    public static String getValue(String data) {
-        String result = "";
-        for (int i = data.indexOf("=") + 2; i < data.length(); i++) {
-            result += data.charAt(i) + "";
+    public static Connection getConnection() throws Exception {
+        try {
+            String driver = "com.mysql.cj.jdbc.Driver";
+            String url = "jdbc:mysql://localhost:3306/productivity";
+            String username = "root";
+            String password = "Bobo24680";
+            Class.forName(driver);
+            Connection conn = DriverManager.getConnection(url, username, password);
+            return conn;
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        return result;
+
+        return null;
+
     }
 }

@@ -1,6 +1,7 @@
 package utils;
 
 public class GoalContainer {
+    static int count;
     String Date;
     String Goal;
     int Difficulty;
@@ -9,9 +10,10 @@ public class GoalContainer {
         this.Date = Date;
         this.Goal = Goal;
         this.Difficulty = Difficulty;
+        count++;
     }
 
-    public void CreateNewGoal() {
+    public void CreateNewGoal() throws Exception {
         DataHandler.CreateNewGoal(this);
     }
 }

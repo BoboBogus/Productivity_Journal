@@ -21,6 +21,7 @@ public class JournalPanel extends JPanel implements ItemListener {
     public JournalPanel() {
         // Main GUI vars for submission page
         // Goal SelectionSystem.out.println(FrameCount);
+        setBackground(Color.LIGHT_GRAY);
         goals[0] = "Create Goal";
         comboBoxPane = new JPanel();
         goalSelection = new JComboBox(goals);
@@ -50,7 +51,14 @@ public class JournalPanel extends JPanel implements ItemListener {
         GoalDifficulty = new JTextField();
 
         JButton button = new JButton("Create New Goal");
-        button.addActionListener(e -> createNewGoal());
+        button.addActionListener(e -> {
+            try {
+                createNewGoal();
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });
 
         GoalName.setSize(new Dimension(100, 100));
         GoalDifficulty.setSize(new Dimension(50, 100));
@@ -62,7 +70,7 @@ public class JournalPanel extends JPanel implements ItemListener {
         setLayout(null);
     }
 
-    void createNewGoal() {
+    void createNewGoal() throws Exception {
         System.out.println(GoalName.getText());
         JPanel card = new Submission(GoalName.getText());
         card.setPreferredSize(new Dimension(1900, 1000));

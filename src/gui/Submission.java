@@ -86,12 +86,19 @@ public class Submission extends JPanel {
         add(submit);
         submit.setFont(new Font("Times New Roman", Font.BOLD, 18));
         submit.setBounds(1575, 870, 200, 70);
-        submit.addActionListener(e -> Submit());
+        submit.addActionListener(e -> {
+            try {
+                Submit();
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });
         setLayout(null);
         setVisible(true);
     }
 
-    void Submit() {
+    void Submit() throws Exception {
         ReflectionContainer container = new ReflectionContainer("8/4/2022", this.getName(), reflection.getText(),
                 rating, 0);
         container.SaveReflectionContainer();
