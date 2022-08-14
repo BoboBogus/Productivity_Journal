@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataHandler {
+    public static Connection conn;
 
     // Create New Goal in the txt file
     public static void CreateNewGoal(GoalContainer container) throws Exception {
@@ -15,11 +16,9 @@ public class DataHandler {
         String date = container.Date;
         String goal = container.Goal;
         int difficulty = container.Difficulty;
-        Connection conn = getConnection();
         Statement stmt = conn.createStatement();
         String append = "insert into goals values('" + id + "','" + date + "','" + goal + "','" + difficulty + "')";
         stmt.executeUpdate(append);
-        conn.close();
     }
 
     public static void CreateNewReflection(ReflectionContainer container) throws Exception {
@@ -29,19 +28,16 @@ public class DataHandler {
         String description = container.Description;
         int stars = container.stars;
         int difficulty = container.difficulty;
-        Connection conn = getConnection();
         Statement stmt = conn.createStatement();
         String append = "insert into reflections values('" + id + "','" + date + "','" + goal + "','" + description
                 + "','" + stars + "','" + difficulty
                 + "')";
         stmt.executeUpdate(append);
-        conn.close();
     }
 
     // outputs a GoalContainer based on the starting position of the text container
     // in the txt file
     public static GoalContainer readGoalElements(int identifier) throws Exception {
-        Connection conn = getConnection();
         PreparedStatement p = null;
         ResultSet rs = null;
         try {
@@ -68,14 +64,12 @@ public class DataHandler {
             // Print exception pop-up on screen
             System.out.println(e);
         }
-        conn.close();
         return null;
     }
 
     // outputs a ReflectionContainer based on the starting position of the text
     // container in the txt file
     public static ReflectionContainer readReflectionElements(int identifier) throws Exception {
-        Connection conn = getConnection();
         PreparedStatement p = null;
         ResultSet rs = null;
         try {
@@ -105,7 +99,6 @@ public class DataHandler {
             // Print exception pop-up on screen
             System.out.println(e);
         }
-        conn.close();
         return null;
     }
 

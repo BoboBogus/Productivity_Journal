@@ -3,6 +3,7 @@ import java.awt.Color;
 import javax.swing.*;
 import java.awt.*;
 import gui.*;
+import utils.*;
 
 public class AppFrame extends JFrame {
     public AppFrame() {
@@ -20,7 +21,8 @@ public class AppFrame extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         new AppFrame();
+        DataHandler.conn = DataHandler.getConnection();
     }
 }

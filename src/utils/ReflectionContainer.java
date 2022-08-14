@@ -1,7 +1,7 @@
 package utils;
 
 public class ReflectionContainer {
-    static int count;
+    static int count = 1;
     String Date;
     String Goal;
     String Description;
@@ -12,6 +12,7 @@ public class ReflectionContainer {
     int id;
 
     public ReflectionContainer(String Date, String Goal, String Description, int stars, int difficulty) {
+        this.id = count;
         this.Date = Date;
         this.Goal = Goal;
         this.Description = Description;
