@@ -41,10 +41,6 @@ public class DataHandler {
     // outputs a GoalContainer based on the starting position of the text container
     // in the txt file
     public static GoalContainer readGoalElements(int identifier) throws Exception {
-        String Date = "";
-        String Goal = "";
-        int Difficulty = -1;
-
         Connection conn = getConnection();
         PreparedStatement p = null;
         ResultSet rs = null;
@@ -79,10 +75,6 @@ public class DataHandler {
     // outputs a ReflectionContainer based on the starting position of the text
     // container in the txt file
     public static ReflectionContainer readReflectionElements(int identifier) throws Exception {
-        String Date = "";
-        String Goal = "";
-        int Difficulty = -1;
-
         Connection conn = getConnection();
         PreparedStatement p = null;
         ResultSet rs = null;
@@ -122,8 +114,8 @@ public class DataHandler {
             String driver = "com.mysql.cj.jdbc.Driver";
             // personal external ip
             String url = "jdbc:mysql://47.205.210.228:3306/productivity";
-            String username = "root";
-            String password = "Bobo24680";
+            String username = "global";
+            String password = "password";
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url, username, password);
             return conn;
