@@ -12,24 +12,24 @@ public class DataHandler {
 
     // Create New Goal in the txt file
     public static void CreateNewGoal(GoalContainer container) throws Exception {
-        int id = container.id;
         String date = container.Date;
         String goal = container.Goal;
         int difficulty = container.Difficulty;
         Statement stmt = conn.createStatement();
-        String append = "insert into goals values('" + id + "','" + date + "','" + goal + "','" + difficulty + "')";
+        String append = "insert into goals (date,goal,difficulty) values('" + date + "','" + goal + "','" + difficulty
+                + "')";
         stmt.executeUpdate(append);
     }
 
     public static void CreateNewReflection(ReflectionContainer container) throws Exception {
-        int id = container.id;
         String date = container.Date;
         String goal = container.Goal;
         String description = container.Description;
         int stars = container.stars;
         int difficulty = container.difficulty;
         Statement stmt = conn.createStatement();
-        String append = "insert into reflections values('" + id + "','" + date + "','" + goal + "','" + description
+        String append = "insert into reflections (date,goal,description,stars,difficulty) values('" + date + "','"
+                + goal + "','" + description
                 + "','" + stars + "','" + difficulty
                 + "')";
         stmt.executeUpdate(append);

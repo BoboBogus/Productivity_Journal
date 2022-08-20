@@ -25,7 +25,6 @@ public class JournalPanel extends JPanel implements ItemListener {
         goals[0] = "Create Goal";
         comboBoxPane = new JPanel();
         goalSelection = new JComboBox(goals);
-        System.out.println(goalSelection);
         cards = new JPanel(new CardLayout());
         JPanel newGoalPane = new JPanel();
         createFrameNew(newGoalPane);
@@ -71,7 +70,6 @@ public class JournalPanel extends JPanel implements ItemListener {
     }
 
     void createNewGoal() throws Exception {
-        System.out.println(GoalName.getText());
         JPanel card = new Submission(GoalName.getText());
         card.setPreferredSize(new Dimension(1900, 1000));
         cards.add(card, GoalName.getText());

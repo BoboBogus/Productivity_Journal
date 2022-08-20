@@ -14,7 +14,6 @@ public class AppFrame extends JFrame {
         JTabbedPane Tabbed = new JTabbedPane();
         Tabbed.addTab("Graph", Graph);
         Tabbed.addTab("Journal", Journal);
-
         add(Tabbed);
         pack();
         setLocationRelativeTo(null);
