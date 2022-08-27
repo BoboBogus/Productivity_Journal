@@ -106,7 +106,7 @@ public class DataHandler {
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
             // personal external ip
-            String url = "jdbc:mysql://47.205.210.228:3306/productivity";
+            String url = "jdbc:mysql://47.205.208.30:3306/productivity";
             String username = "global";
             String password = "password";
             Class.forName(driver);
