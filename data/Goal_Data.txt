@@ -1,4 +1,0 @@
-8/4/2022
-Goal = 0
-Difficulty = 0
-

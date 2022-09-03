@@ -1,3 +1,5 @@
+package gui;
+
 import java.awt.Color;
 
 import javax.swing.*;
@@ -18,10 +20,5 @@ public class AppFrame extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-    }
-
-    public static void main(String[] args) throws Exception {
-        new AppFrame();
-        DataHandler.conn = DataHandler.getConnection();
     }
 }

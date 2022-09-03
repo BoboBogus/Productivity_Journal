@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import utils.GoalContainer;
+import utils.*;
 
 public class JournalPanel extends JPanel implements ItemListener {
     JPanel cards;
@@ -75,7 +75,7 @@ public class JournalPanel extends JPanel implements ItemListener {
         cards.add(card, GoalName.getText());
         goalSelection.addItem(GoalName.getText());
 
-        GoalContainer container = new GoalContainer("8/4/2022", GoalName.getText(),
+        GoalContainer container = new GoalContainer("8/4/2022", DataHandler.user, GoalName.getText(),
                 Integer.parseInt(GoalDifficulty.getText()));
         container.CreateNewGoal();
     }

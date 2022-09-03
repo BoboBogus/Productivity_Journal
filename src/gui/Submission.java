@@ -2,7 +2,7 @@ package gui;
 
 import javax.swing.*;
 
-import utils.ReflectionContainer;
+import utils.*;
 
 import java.awt.*;
 
@@ -99,7 +99,8 @@ public class Submission extends JPanel {
     }
 
     void Submit() throws Exception {
-        ReflectionContainer container = new ReflectionContainer("8/4/2022", this.getName(), reflection.getText(),
+        ReflectionContainer container = new ReflectionContainer("8/4/2022", DataHandler.user, this.getName(),
+                reflection.getText(),
                 rating, 0);
         container.SaveReflectionContainer();
     }

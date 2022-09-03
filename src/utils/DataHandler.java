@@ -6,9 +6,69 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import gui.LoginWindow;
 
 public class DataHandler {
     public static Connection conn;
+    public static String user;
+
+    public static void CreateAccount(String username, String password) throws SQLException {
+        Statement stmt = conn.createStatement();
+        String append = "insert into users (username, password) values('" + username + "', '" + password + "')";
+        stmt.executeUpdate(append);
+    }
+
+    public static boolean CheckPassword(String username, String password) throws SQLException {
+        try {
+            // SQL command data stored in String datatype
+            ResultSet rs = CheckUsername(username);
+            System.out.println(rs);
+            if (rs != null) {
+                String pass = rs.getString("password");
+                pass = pass.trim();
+                password = password.trim();
+                if (password.equals(pass)) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+
+            // Print exception pop-up on screen
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public static ResultSet CheckUsername(String username) {
+        PreparedStatement p = null;
+        ResultSet rs = null;
+        try {
+
+            // SQL command data stored in String datatype
+            String sql = "select * from users";
+            p = conn.prepareStatement(sql);
+            rs = p.executeQuery();
+
+            // Condition check
+            while (rs.next()) {
+                String currentUsername = (String) rs.getString("username");
+                System.out.println(currentUsername);
+                currentUsername = currentUsername.trim();
+                username = username.trim();
+                if (username.equals(currentUsername)) {
+                    System.out.println("working");
+                    return rs;
+                }
+
+            }
+        } catch (SQLException e) {
+
+            // Print exception pop-up on screen
+            System.out.println(e);
+        }
+        System.out.println("null");
+        return null;
+    }
 
     // Create New Goal in the txt file
     public static void CreateNewGoal(GoalContainer container) throws Exception {
@@ -16,7 +76,8 @@ public class DataHandler {
         String goal = container.Goal;
         int difficulty = container.Difficulty;
         Statement stmt = conn.createStatement();
-        String append = "insert into goals (date,goal,difficulty) values('" + date + "','" + goal + "','" + difficulty
+        String append = "insert into goals (date,user,goal,difficulty) values('" + date + "','" + user + "','" + goal
+                + "','" + difficulty
                 + "')";
         stmt.executeUpdate(append);
     }
@@ -28,7 +89,8 @@ public class DataHandler {
         int stars = container.stars;
         int difficulty = container.difficulty;
         Statement stmt = conn.createStatement();
-        String append = "insert into reflections (date,goal,description,stars,difficulty) values('" + date + "','"
+        String append = "insert into reflections (date,user,goal,description,stars,difficulty) values('" + date + "','"
+                + user + "','"
                 + goal + "','" + description
                 + "','" + stars + "','" + difficulty
                 + "')";
@@ -118,5 +180,10 @@ public class DataHandler {
 
         return null;
 
+    }
+
+    public static void main(String[] args) throws Exception {
+        conn = getConnection();
+        new LoginWindow();
     }
 }

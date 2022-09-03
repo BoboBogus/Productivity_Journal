@@ -3,14 +3,16 @@ package utils;
 public class GoalContainer {
     static int count = 1;
     String Date;
+    String User;
     String Goal;
     int Difficulty;
 
     int id;
 
-    public GoalContainer(String Date, String Goal, int Difficulty) {
+    public GoalContainer(String Date, String User, String Goal, int Difficulty) {
         this.id = count;
         this.Date = Date;
+        this.User = User;
         this.Goal = Goal;
         this.Difficulty = Difficulty;
         count++;
