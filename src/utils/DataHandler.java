@@ -7,8 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import gui.LoginWindow;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class DataHandler {
+    static Dotenv dotenv = Dotenv.load();
+    static String url = dotenv.get("DATABASE_URL");
+    static String username = dotenv.get("DATABASE_USERNAME");
+    static String password = dotenv.get("DATABASE_PASSWORD");
     public static Connection conn;
     public static String user;
 
@@ -167,10 +172,6 @@ public class DataHandler {
     public static Connection getConnection() throws Exception {
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
-            // personal external ip
-            String url = "jdbc:mysql://47.205.208.30:3306/productivity";
-            String username = "global";
-            String password = "password";
             Class.forName(driver);
             Connection conn = DriverManager.getConnection(url, username, password);
             return conn;
