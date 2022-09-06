@@ -4,7 +4,7 @@ public class GoalContainer {
     static int count = 1;
     String Date;
     String User;
-    String Goal;
+    public String Goal;
     int Difficulty;
 
     int id;

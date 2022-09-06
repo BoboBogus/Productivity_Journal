@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 import utils.*;
@@ -29,6 +31,13 @@ public class JournalPanel extends JPanel implements ItemListener {
         JPanel newGoalPane = new JPanel();
         createFrameNew(newGoalPane);
         cards.add(newGoalPane, goals[0]);
+
+        try {
+            loadGoals();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         goalSelection.addItemListener(this);
         comboBoxPane.add(goalSelection);
@@ -78,6 +87,16 @@ public class JournalPanel extends JPanel implements ItemListener {
         GoalContainer container = new GoalContainer("8/4/2022", DataHandler.user, GoalName.getText(),
                 Integer.parseInt(GoalDifficulty.getText()));
         container.CreateNewGoal();
+    }
+
+    void loadGoals() throws Exception {
+        ArrayList<GoalContainer> containers = DataHandler.readGoalElements();
+        for (GoalContainer container : containers) {
+            JPanel card = new Submission(container.Goal);
+            card.setPreferredSize(new Dimension(1900, 1000));
+            cards.add(card, container.Goal);
+            goalSelection.addItem(container.Goal);
+        }
     }
 
     public void itemStateChanged(ItemEvent evt) {

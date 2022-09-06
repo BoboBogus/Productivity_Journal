@@ -81,9 +81,9 @@ public class LoginWindow extends JFrame {
         String user = username.getText();
         String pass = password.getText();
         if (DataHandler.CheckPassword(user, pass)) {
+            DataHandler.user = user;
             new AppFrame();
             Alert("welcome! " + user);
-            DataHandler.user = user;
         } else {
             Alert("password and or username is incorrect");
         }

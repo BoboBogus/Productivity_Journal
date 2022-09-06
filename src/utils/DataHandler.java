@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
 import gui.LoginWindow;
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -27,7 +29,6 @@ public class DataHandler {
         try {
             // SQL command data stored in String datatype
             ResultSet rs = CheckUsername(username);
-            System.out.println(rs);
             if (rs != null) {
                 String pass = rs.getString("password");
                 pass = pass.trim();
@@ -57,11 +58,9 @@ public class DataHandler {
             // Condition check
             while (rs.next()) {
                 String currentUsername = (String) rs.getString("username");
-                System.out.println(currentUsername);
                 currentUsername = currentUsername.trim();
                 username = username.trim();
                 if (username.equals(currentUsername)) {
-                    System.out.println("working");
                     return rs;
                 }
 
@@ -104,9 +103,10 @@ public class DataHandler {
 
     // outputs a GoalContainer based on the starting position of the text container
     // in the txt file
-    public static GoalContainer readGoalElements(int identifier) throws Exception {
+    public static ArrayList<GoalContainer> readGoalElements() throws Exception {
         PreparedStatement p = null;
         ResultSet rs = null;
+        ArrayList<GoalContainer> containers = new ArrayList<GoalContainer>();
         try {
 
             // SQL command data stored in String datatype
@@ -116,16 +116,19 @@ public class DataHandler {
 
             // Condition check
             while (rs.next()) {
-                int id = rs.getInt("id");
-                if (identifier == id) {
+                String currentUsername = rs.getString("user");
+                if (user.equals(currentUsername)) {
+                    String id = rs.getString("id");
                     String date = rs.getString("date");
                     String goal = rs.getString("goal");
+                    System.out.println("goal");
                     int difficulty = rs.getInt("difficulty");
                     GoalContainer container = new GoalContainer(id, date, goal, difficulty);
-                    return container;
+                    containers.add(container);
                 }
 
             }
+            return containers;
         } catch (SQLException e) {
 
             // Print exception pop-up on screen
