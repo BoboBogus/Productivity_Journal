@@ -99,7 +99,7 @@ public class Submission extends JPanel {
     }
 
     void Submit() throws Exception {
-        ReflectionContainer container = new ReflectionContainer("8/4/2022", DataHandler.user, this.getName(),
+        ReflectionContainer container = new ReflectionContainer(DataHandler.user, DataHandler.date, this.getName(),
                 reflection.getText(),
                 rating, 0);
         container.SaveReflectionContainer();

@@ -80,11 +80,11 @@ public class JournalPanel extends JPanel implements ItemListener {
 
     void createNewGoal() throws Exception {
         JPanel card = new Submission(GoalName.getText());
-        card.setPreferredSize(new Dimension(1900, 1000));
+        card.setPreferredSize(new Dimension(500, 200));
         cards.add(card, GoalName.getText());
         goalSelection.addItem(GoalName.getText());
 
-        GoalContainer container = new GoalContainer("8/4/2022", DataHandler.user, GoalName.getText(),
+        GoalContainer container = new GoalContainer(DataHandler.date, DataHandler.user, GoalName.getText(),
                 Integer.parseInt(GoalDifficulty.getText()));
         container.CreateNewGoal();
     }
@@ -93,7 +93,7 @@ public class JournalPanel extends JPanel implements ItemListener {
         ArrayList<GoalContainer> containers = DataHandler.readGoalElements();
         for (GoalContainer container : containers) {
             JPanel card = new Submission(container.Goal);
-            card.setPreferredSize(new Dimension(1900, 1000));
+            card.setPreferredSize(new Dimension(500, 200));
             cards.add(card, container.Goal);
             goalSelection.addItem(container.Goal);
         }

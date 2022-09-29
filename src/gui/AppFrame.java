@@ -8,15 +8,16 @@ import gui.*;
 import utils.*;
 
 public class AppFrame extends JFrame {
-    public AppFrame() {
-        setSize(100, 100);
+    public AppFrame() throws Exception {
+        setLayout(new BorderLayout());
         setBackground(Color.DARK_GRAY);
         JournalPanel Journal = new JournalPanel();
-        GraphPanel Graph = new GraphPanel();
+        ProgressPanel Graph = new ProgressPanel();
         JTabbedPane Tabbed = new JTabbedPane();
-        Tabbed.addTab("Graph", Graph);
+        Tabbed.addTab("Progress", Graph);
         Tabbed.addTab("Journal", Journal);
-        add(Tabbed);
+        Tabbed.setSize(900, 500);
+        add(Tabbed, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);

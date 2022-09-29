@@ -16,6 +16,7 @@ public class DataHandler {
     static String url = dotenv.get("DATABASE_URL");
     static String username = dotenv.get("DATABASE_USERNAME");
     static String password = dotenv.get("DATABASE_PASSWORD");
+    public static String date = java.time.LocalDate.now().toString();
     public static Connection conn;
     public static String user;
 
@@ -110,7 +111,7 @@ public class DataHandler {
         try {
 
             // SQL command data stored in String datatype
-            String sql = "select * from reflections";
+            String sql = "select * from goals";
             p = conn.prepareStatement(sql);
             rs = p.executeQuery();
 
@@ -118,12 +119,46 @@ public class DataHandler {
             while (rs.next()) {
                 String currentUsername = rs.getString("user");
                 if (user.equals(currentUsername)) {
-                    String id = rs.getString("id");
                     String date = rs.getString("date");
                     String goal = rs.getString("goal");
-                    System.out.println("goal");
                     int difficulty = rs.getInt("difficulty");
-                    GoalContainer container = new GoalContainer(id, date, goal, difficulty);
+                    GoalContainer container = new GoalContainer(user, date, goal, difficulty);
+                    containers.add(container);
+                }
+
+            }
+            return containers;
+        } catch (SQLException e) {
+
+            // Print exception pop-up on screen
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public static ArrayList<ReflectionContainer> readReflectionElements(String goal) throws Exception {
+        PreparedStatement p = null;
+        ResultSet rs = null;
+        ArrayList<ReflectionContainer> containers = new ArrayList<ReflectionContainer>();
+        try {
+
+            // SQL command data stored in String datatype
+            String sql = "select * from reflections";
+            p = conn.prepareStatement(sql);
+            rs = p.executeQuery();
+
+            // Condition check
+            while (rs.next()) {
+                String currentUsername = rs.getString("user");
+                String currentGoal = rs.getString("goal");
+                if (user.equals(currentUsername) && goal.equals(currentGoal)) {
+                    String date = rs.getString("date");
+                    String title = rs.getString("Goal");
+                    String description = rs.getString("description");
+                    int stars = rs.getInt("stars");
+                    int difficulty = rs.getInt("difficulty");
+                    ReflectionContainer container = new ReflectionContainer(user, date, title, description, stars,
+                            difficulty);
                     containers.add(container);
                 }
 
@@ -139,38 +174,6 @@ public class DataHandler {
 
     // outputs a ReflectionContainer based on the starting position of the text
     // container in the txt file
-    public static ReflectionContainer readReflectionElements(int identifier) throws Exception {
-        PreparedStatement p = null;
-        ResultSet rs = null;
-        try {
-
-            // SQL command data stored in String datatype
-            String sql = "select * from reflections";
-            p = conn.prepareStatement(sql);
-            rs = p.executeQuery();
-
-            while (rs.next()) {
-
-                int id = rs.getInt("id");
-                if (identifier == id) {
-                    String date = rs.getString("date");
-                    String goal = rs.getString("goal");
-                    String description = rs.getString("description");
-                    int stars = rs.getInt("stars");
-                    int difficulty = rs.getInt("difficulty");
-                    ReflectionContainer container = new ReflectionContainer(id, date, goal, description, stars,
-                            difficulty);
-                    return container;
-                }
-
-            }
-        } catch (SQLException e) {
-
-            // Print exception pop-up on screen
-            System.out.println(e);
-        }
-        return null;
-    }
 
     public static Connection getConnection() throws Exception {
         try {

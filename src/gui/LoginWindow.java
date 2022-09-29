@@ -77,7 +77,7 @@ public class LoginWindow extends JFrame {
         setVisible(true);
     }
 
-    void Login() throws SQLException {
+    void Login() throws Exception {
         String user = username.getText();
         String pass = password.getText();
         if (DataHandler.CheckPassword(user, pass)) {
