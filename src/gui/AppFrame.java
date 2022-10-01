@@ -10,6 +10,7 @@ import utils.*;
 public class AppFrame extends JFrame {
     public AppFrame() throws Exception {
         setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(values.windowX, values.windowY));
         setBackground(Color.DARK_GRAY);
         JournalPanel Journal = new JournalPanel();
         ProgressPanel Graph = new ProgressPanel();

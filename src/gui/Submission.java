@@ -16,14 +16,21 @@ public class Submission extends JPanel {
     int rating = 0; // accessed later
 
     public Submission(String name) {
+        setLayout(new BorderLayout());
+        setSize(utils.ComponentPercentage(50, 50));
         setName(name);
         setBackground(Color.lightGray);
         reflection = new JTextArea();
-        add(reflection);
-        reflection.setBounds(125, 45, 1650, 820);
+        add(reflection, BorderLayout.CENTER);
         reflection.setFont(new Font("Hiragino Kaku Gothic Pro", Font.PLAIN, 22));
         reflection.setBackground(Color.decode("#2e353c"));
         reflection.setForeground(Color.decode("#fbfbfb"));
+
+        // Rating Label ***************************** needs to be overhauled
+        JLabel rate = new JLabel();
+        rate.setText("Rate how you did:");
+        rate.setFont(new Font("Times New Roman", Font.BOLD, 18));
+        add(rate, BorderLayout.PAGE_END);
 
         // Star rating buttons
         star1 = new JButton();
@@ -36,12 +43,11 @@ public class Submission extends JPanel {
         star3.addActionListener(e -> rating = 3);
         star4.addActionListener(e -> rating = 4);
         star5.addActionListener(e -> rating = 5);
-        add(star1);
-        add(star2);
-        add(star3);
-        add(star4);
-        add(star5);
-        star1.setBounds(1150, 892, 30, 30);
+        add(star1, BorderLayout.PAGE_END);
+        add(star2, BorderLayout.PAGE_END);
+        add(star3, BorderLayout.PAGE_END);
+        add(star4, BorderLayout.PAGE_END);
+        add(star5, BorderLayout.PAGE_END);
 
         // switch statement for every case of rating (for example: if the fifth star is
         // pressed, all of the other stars must also be activated)
@@ -72,20 +78,13 @@ public class Submission extends JPanel {
                 star5.setBackground(Color.decode("#ede35a"));
                 break;
         }
-        // Rating Label
-        JLabel rate = new JLabel();
-        rate.setText("Rate how you did:");
-        rate.setBounds(1000, 892, 180, 35);
-        rate.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        add(rate);
 
         // Submit button
         JButton submit = new JButton("Submit");
         submit.setBackground(Color.GREEN);
         submit.setForeground(Color.WHITE);
-        add(submit);
+        add(submit, BorderLayout.EAST);
         submit.setFont(new Font("Times New Roman", Font.BOLD, 18));
-        submit.setBounds(1575, 870, 200, 70);
         submit.addActionListener(e -> {
             try {
                 Submit();
@@ -94,14 +93,13 @@ public class Submission extends JPanel {
                 e1.printStackTrace();
             }
         });
-        setLayout(null);
         setVisible(true);
     }
 
     void Submit() throws Exception {
         ReflectionContainer container = new ReflectionContainer(DataHandler.user, DataHandler.date, this.getName(),
                 reflection.getText(),
-                rating, 0);
+                rating, 5);
         container.SaveReflectionContainer();
     }
 }

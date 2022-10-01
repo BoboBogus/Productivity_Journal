@@ -24,6 +24,7 @@ public class JournalPanel extends JPanel implements ItemListener {
         // Main GUI vars for submission page
         // Goal SelectionSystem.out.println(FrameCount);
         setBackground(Color.LIGHT_GRAY);
+        setLayout(new BorderLayout());
         goals[0] = "Create Goal";
         comboBoxPane = new JPanel();
         goalSelection = new JComboBox(goals);
@@ -47,7 +48,6 @@ public class JournalPanel extends JPanel implements ItemListener {
         add(cards, BorderLayout.CENTER);
 
         // Submission text area
-        setLayout(new FlowLayout());
         // allows items to not be in a specific layout
         setVisible(true);
     }
@@ -55,8 +55,10 @@ public class JournalPanel extends JPanel implements ItemListener {
     public void createFrameNew(JPanel pane) {
         JLabel label = new JLabel("Input Goal Name");
         GoalName = new JTextField();
+        GoalName.setPreferredSize(new Dimension(70, 30));
         JLabel label2 = new JLabel("Input Difficulty ranges 1-5");
         GoalDifficulty = new JTextField();
+        GoalDifficulty.setPreferredSize(new Dimension(70, 30));
 
         JButton button = new JButton("Create New Goal");
         button.addActionListener(e -> {
@@ -70,21 +72,19 @@ public class JournalPanel extends JPanel implements ItemListener {
 
         GoalName.setSize(new Dimension(100, 100));
         GoalDifficulty.setSize(new Dimension(50, 100));
-        pane.add(label, BorderLayout.CENTER);
-        pane.add(button, BorderLayout.CENTER);
+        pane.add(label, BorderLayout.LINE_START);
+        pane.add(button, BorderLayout.LINE_END);
         pane.add(GoalName, BorderLayout.NORTH);
         pane.add(GoalDifficulty, BorderLayout.NORTH);
-        pane.add(label2, BorderLayout.CENTER);
-        setLayout(null);
+        pane.add(label2, BorderLayout.LINE_START);
     }
 
     void createNewGoal() throws Exception {
         JPanel card = new Submission(GoalName.getText());
-        card.setPreferredSize(new Dimension(500, 200));
         cards.add(card, GoalName.getText());
         goalSelection.addItem(GoalName.getText());
 
-        GoalContainer container = new GoalContainer(DataHandler.date, DataHandler.user, GoalName.getText(),
+        GoalContainer container = new GoalContainer(DataHandler.user, DataHandler.date, GoalName.getText(),
                 Integer.parseInt(GoalDifficulty.getText()));
         container.CreateNewGoal();
     }
@@ -93,7 +93,7 @@ public class JournalPanel extends JPanel implements ItemListener {
         ArrayList<GoalContainer> containers = DataHandler.readGoalElements();
         for (GoalContainer container : containers) {
             JPanel card = new Submission(container.Goal);
-            card.setPreferredSize(new Dimension(500, 200));
+            card.setBackground(Color.lightGray);
             cards.add(card, container.Goal);
             goalSelection.addItem(container.Goal);
         }

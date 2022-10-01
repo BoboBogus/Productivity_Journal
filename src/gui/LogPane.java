@@ -9,11 +9,10 @@ import utils.*;
 public class LogPane extends JPanel {
     GoalPanel goalPanel;
 
-    public LogPane() throws Exception {
+    public LogPane(ArrayList<GoalContainer> goals) throws Exception {
         setBackground(Color.BLACK);
         setVisible(true);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        ArrayList<GoalContainer> goals = DataHandler.readGoalElements();
         for (GoalContainer goal : goals) {
             String title = goal.Goal;
             String difficulty = String.valueOf(goal.Difficulty);
