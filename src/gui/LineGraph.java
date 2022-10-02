@@ -1,4 +1,4 @@
-package utils;
+package gui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -11,12 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.*;
+import utils.*;
 
 public class LineGraph extends JPanel implements ActionListener {
-    static int panelWidth;
-    static int panelHeight;
-    int windowPercentX = 58;
-    int windowPercentY = 82;
+    int panelWidth;
+    int panelHeight;
     public int[] Xgrid;
     public int[] Ygrid;
     static ArrayList<ReflectionContainer> c;
@@ -26,11 +25,14 @@ public class LineGraph extends JPanel implements ActionListener {
     // supposed to be ArrayList<ReflectionContainer> containers
     public LineGraph(ArrayList<ReflectionContainer> containers) {
         this.c = containers;
-        maximumScore = c.get(0).difficulty * 5;
-        panelWidth = utils.WidthPercentage(windowPercentX);
-        panelHeight = utils.HeightPercentage(windowPercentY);
+        for (ReflectionContainer container : containers) {
+            maximumScore += container.points;
+        }
+    }
+
+    public void initialize() {
         calculateGrid();
-        points = containers_to_points(containers);
+        points = containers_to_points(c);
         setVisible(true);
 
     }
@@ -56,8 +58,10 @@ public class LineGraph extends JPanel implements ActionListener {
 
     static tuple[] containers_to_points(ArrayList<ReflectionContainer> containers) {
         tuple[] result = new tuple[containers.size()];
+        int totalpoints = 0;
         for (int i = 0; i < containers.size(); i++) {
-            tuple point = new tuple(i, containers.get(i).points);
+            totalpoints += containers.get(i).points;
+            tuple point = new tuple(i, totalpoints);
             result[i] = point;
         }
         return result;

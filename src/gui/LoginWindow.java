@@ -83,9 +83,9 @@ public class LoginWindow extends JFrame {
         if (DataHandler.CheckPassword(user, pass)) {
             DataHandler.user = user;
             new AppFrame();
-            Alert("welcome! " + user);
+            DataHandler.Alert("welcome! " + user);
         } else {
-            Alert("password and or username is incorrect");
+            DataHandler.Alert("password and or username is incorrect");
         }
     }
 
@@ -94,14 +94,10 @@ public class LoginWindow extends JFrame {
         String user = username.getText();
         String pass = password.getText();
         if (DataHandler.CheckUsername(user) != null) {
-            Alert("account already exists");
+            DataHandler.Alert("account already exists");
             return;
         }
-        Alert("Account Created! \n username " + user + ", password " + pass);
+        DataHandler.Alert("Account Created! \n username " + user + ", password " + pass);
         DataHandler.CreateAccount(user, pass);
-    }
-
-    void Alert(String message) {
-        showMessageDialog(null, message);
     }
 }

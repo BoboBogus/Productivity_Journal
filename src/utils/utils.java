@@ -19,7 +19,7 @@ public class utils {
         return y;
     }
 
-    static int[] reverse(int a[], int n) {
+    public static int[] reverse(int a[], int n) {
         int[] b = new int[n];
         int j = n;
         for (int i = 0; i < n; i++) {

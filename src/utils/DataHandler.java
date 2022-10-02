@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import gui.LoginWindow;
 import io.github.cdimascio.dotenv.Dotenv;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 public class DataHandler {
     static Dotenv dotenv = Dotenv.load();
     static String url = dotenv.get("DATABASE_URL");
@@ -136,6 +138,36 @@ public class DataHandler {
         return null;
     }
 
+    public static GoalContainer readGoalElementsName(String name) throws Exception {
+        PreparedStatement p = null;
+        ResultSet rs = null;
+        try {
+
+            // SQL command data stored in String datatype
+            String sql = "select * from goals";
+            p = conn.prepareStatement(sql);
+            rs = p.executeQuery();
+
+            // Condition check
+            while (rs.next()) {
+                String currentUsername = rs.getString("user");
+                String currentName = rs.getString("goal");
+                if (user.equals(currentUsername) && name.equals(currentName)) {
+                    String date = rs.getString("date");
+                    int difficulty = rs.getInt("difficulty");
+                    GoalContainer container = new GoalContainer(user, date, name, difficulty);
+                    return container;
+                }
+
+            }
+        } catch (SQLException e) {
+
+            // Print exception pop-up on screen
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public static ArrayList<ReflectionContainer> readReflectionElements(String goal) throws Exception {
         PreparedStatement p = null;
         ResultSet rs = null;
@@ -192,5 +224,9 @@ public class DataHandler {
     public static void main(String[] args) throws Exception {
         conn = getConnection();
         new LoginWindow();
+    }
+
+    public static void Alert(String message) {
+        showMessageDialog(null, message);
     }
 }

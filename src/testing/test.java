@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
 import javax.swing.Timer;
+
+import gui.LineGraph;
 import utils.*;
 import java.awt.*;
 

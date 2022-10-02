@@ -6,8 +6,9 @@ public class ReflectionContainer {
     String Goal;
     public String Description;
     public int stars;
-    int difficulty;
-    int points;
+    public int difficulty;
+    public int points;
+    public GoalContainer parent;
 
     public ReflectionContainer(String User, String Date, String Goal, String Description, int stars,
             int difficulty) {
